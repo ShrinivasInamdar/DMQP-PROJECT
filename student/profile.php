@@ -14,16 +14,16 @@ $error = '';
 // Handle resume update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['new_resume'])) {
     $upload_dir = '../uploads/resumes/';
-    
+
     $file = $_FILES['new_resume'];
     $file_name = $file['name'];
     $file_tmp = $file['tmp_name'];
     $file_size = $file['size'];
     $file_error = $file['error'];
-    
+
     $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
     $allowed_extensions = ['pdf', 'doc', 'docx'];
-    
+
     if ($file_error !== 0) {
         $error = "Error uploading file!";
     } elseif (!in_array($file_ext, $allowed_extensions)) {
@@ -36,12 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['new_resume'])) {
         $old_resume_result = $conn->query($get_old_resume);
         $old_resume_data = $old_resume_result->fetch_assoc();
         $old_resume_path = $old_resume_data['resume_link'];
-        
+
         // Generate unique filename
         $new_filename = uniqid('resume_') . '_' . time() . '.' . $file_ext;
         $upload_path = 'uploads/resumes/' . $new_filename; // Relative path for database
         $full_upload_path = '../' . $upload_path; // Full path for file operations
-        
+
         // Move uploaded file
         if (move_uploaded_file($file_tmp, $full_upload_path)) {
             // Update database
@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['new_resume'])) {
                 if (file_exists('../' . $old_resume_path)) {
                     unlink('../' . $old_resume_path);
                 }
-                
+
                 $success = "Resume updated successfully!";
-                
+
                 // Redirect to refresh page and show updated resume
                 header("Location: profile.php?success=1");
                 exit();
@@ -67,6 +67,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['new_resume'])) {
     }
 }
 
+// Handle resume update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['new_resume'])) {
+    // ... your resume update logic
+}
+
+// Update skills block
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_skills'])) {
+    $updated_skills = trim($_POST['updated_skills']);
+    if (!empty($updated_skills)) {
+        $update_skills_query = "UPDATE student SET skills = '$updated_skills' WHERE student_id = $student_id";
+        if ($conn->query($update_skills_query)) {
+            header("Location: profile.php?skills_updated=1");
+            exit();
+        } else {
+            $error = "Error updating skills: " . $conn->error;
+        }
+    } else {
+        $error = "Skills field cannot be empty!";
+    }
+}
+
+// Check if skills were updated
+if (isset($_GET['skills_updated']) && $_GET['skills_updated'] == 1) {
+    $success = "Skills updated successfully!";
+}
+
+// Get student details
+$query = "SELECT s.*, u.email FROM student s JOIN users u ON s.user_id = u.user_id WHERE s.student_id = $student_id";
+$result = $conn->query($query);
+$student = $result->fetch_assoc();
+
 // Check for success parameter
 if (isset($_GET['success']) && $_GET['success'] == 1) {
     $success = "Resume updated successfully!";
@@ -79,6 +110,7 @@ $student = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,25 +122,30 @@ $student = $result->fetch_assoc();
             background: #f5f7fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .navbar-custom {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
         .navbar-custom .navbar-brand {
             color: white;
             font-weight: 700;
             font-size: 1.5rem;
         }
+
         .navbar-custom .nav-link {
             color: rgba(255, 255, 255, 0.9);
             margin: 0 10px;
             transition: all 0.3s ease;
         }
+
         .navbar-custom .nav-link:hover {
             color: white;
             transform: translateY(-2px);
         }
+
         .profile-card {
             background: white;
             border-radius: 15px;
@@ -116,6 +153,7 @@ $student = $result->fetch_assoc();
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
             margin-bottom: 30px;
         }
+
         .profile-header {
             text-align: center;
             padding: 30px;
@@ -124,6 +162,7 @@ $student = $result->fetch_assoc();
             color: white;
             margin-bottom: 30px;
         }
+
         .profile-avatar {
             width: 100px;
             height: 100px;
@@ -136,28 +175,34 @@ $student = $result->fetch_assoc();
             font-size: 3rem;
             color: #667eea;
         }
+
         .info-row {
             padding: 15px;
             border-bottom: 1px solid #f0f0f0;
         }
+
         .info-row:last-child {
             border-bottom: none;
         }
+
         .info-label {
             font-weight: 600;
             color: #666;
             margin-bottom: 5px;
         }
+
         .info-value {
             color: #333;
             font-size: 1.1rem;
         }
+
         .resume-section {
             background: #f8f9fa;
             padding: 25px;
             border-radius: 10px;
             margin-top: 20px;
         }
+
         .btn-resume {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -167,16 +212,19 @@ $student = $result->fetch_assoc();
             font-weight: 600;
             transition: all 0.3s ease;
         }
+
         .btn-resume:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
             color: white;
         }
+
         .file-upload-wrapper {
             position: relative;
             overflow: hidden;
             display: inline-block;
         }
+
         .file-upload-input {
             position: absolute;
             font-size: 100px;
@@ -185,6 +233,7 @@ $student = $result->fetch_assoc();
             top: 0;
             cursor: pointer;
         }
+
         .file-upload-label {
             display: inline-block;
             padding: 10px 20px;
@@ -194,11 +243,13 @@ $student = $result->fetch_assoc();
             cursor: pointer;
             transition: all 0.3s ease;
         }
+
         .file-upload-label:hover {
             background: #764ba2;
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
@@ -261,23 +312,24 @@ $student = $result->fetch_assoc();
         <div class="row">
             <div class="col-md-6">
                 <div class="profile-card">
-                    <h5 class="mb-4"><i class="fas fa-info-circle me-2" style="color: #667eea;"></i>Personal Information</h5>
-                    
+                    <h5 class="mb-4"><i class="fas fa-info-circle me-2" style="color: #667eea;"></i>Personal Information
+                    </h5>
+
                     <div class="info-row">
                         <div class="info-label">Roll Number</div>
                         <div class="info-value"><?php echo $student['roll_number']; ?></div>
                     </div>
-                    
+
                     <div class="info-row">
                         <div class="info-label">Department</div>
                         <div class="info-value"><?php echo $student['department']; ?></div>
                     </div>
-                    
+
                     <div class="info-row">
                         <div class="info-label">Year</div>
                         <div class="info-value"><?php echo $student['year']; ?></div>
                     </div>
-                    
+
                     <div class="info-row">
                         <div class="info-label">Email</div>
                         <div class="info-value"><?php echo $student['email']; ?></div>
@@ -286,13 +338,47 @@ $student = $result->fetch_assoc();
             </div>
 
             <div class="col-md-6">
-                <div class="profile-card">
+
+            <div class="profile-card">
+    <h5 class="mb-4 d-flex justify-content-between align-items-center">
+        <span><i class="fas fa-cogs me-2" style="color: #667eea;"></i>Skills & Expertise</span>
+        <button class="btn btn-sm btn-outline-primary" id="editSkillsBtn">
+            <i class="fas fa-edit me-1"></i>Edit
+        </button>
+    </h5>
+
+    <div id="skillsDisplay">
+        <div class="info-row">
+            <div class="info-label">Skills</div>
+            <div class="info-value">
+                <?php 
+                $skills = explode(',', $student['skills']);
+                foreach ($skills as $skill) {
+                    echo '<span class="badge bg-primary me-2 mb-2" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">' . trim($skill) . '</span>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" id="editSkillsForm" style="display: none;">
+        <div class="mb-3">
+            <label for="updated_skills" class="form-label"><strong>Edit Your Skills</strong></label>
+            <textarea name="updated_skills" id="updated_skills" class="form-control" rows="3"><?php echo htmlspecialchars($student['skills']); ?></textarea>
+        </div>
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+            <button type="submit" name="update_skills" class="btn btn-resume">Save Changes</button>
+        </div>
+    </form>
+</div>
+                <!-- <div class="profile-card">
                     <h5 class="mb-4"><i class="fas fa-cogs me-2" style="color: #667eea;"></i>Skills & Expertise</h5>
-                    
+
                     <div class="info-row">
                         <div class="info-label">Skills</div>
                         <div class="info-value">
-                            <?php 
+                            <?php
                             $skills = explode(',', $student['skills']);
                             foreach ($skills as $skill) {
                                 echo '<span class="badge bg-primary me-2 mb-2" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">' . trim($skill) . '</span>';
@@ -300,15 +386,15 @@ $student = $result->fetch_assoc();
                             ?>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="profile-card mt-4">
                     <h5 class="mb-4"><i class="fas fa-file-alt me-2" style="color: #667eea;"></i>Resume</h5>
-                    
+
                     <div class="resume-section">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div>
-                                <?php 
+                                <?php
                                 $file_ext = strtolower(pathinfo($student['resume_link'], PATHINFO_EXTENSION));
                                 $icon_class = 'fa-file-pdf';
                                 $icon_color = '#d32f2f';
@@ -317,22 +403,22 @@ $student = $result->fetch_assoc();
                                     $icon_color = '#2b579a';
                                 }
                                 ?>
-                                <i class="fas <?php echo $icon_class; ?> fa-2x" style="color: <?php echo $icon_color; ?>;"></i>
+                                <i class="fas <?php echo $icon_class; ?> fa-2x"
+                                    style="color: <?php echo $icon_color; ?>;"></i>
                                 <span class="ms-3">
                                     <strong>Current Resume</strong><br>
                                     <small class="text-muted"><?php echo basename($student['resume_link']); ?></small>
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="d-flex gap-2">
-                            <a href="../download_resume.php?file=<?php echo urlencode($student['resume_link']); ?>" 
-                               target="_blank" 
-                               class="btn btn-resume flex-grow-1">
+                            <!-- <a href="../download_resume.php?file=<?php echo urlencode($student['resume_link']); ?>"
+                                target="_blank" class="btn btn-resume flex-grow-1">
                                 <i class="fas fa-eye me-2"></i>View Resume
-                            </a>
-                            <a href="../download_resume.php?file=<?php echo urlencode($student['resume_link']); ?>&download=1" 
-                               class="btn btn-outline-primary flex-grow-1">
+                            </a> -->
+                            <a href="../download_resume.php?file=<?php echo urlencode($student['resume_link']); ?>&download=1"
+                                class="btn btn-outline-primary flex-grow-1">
                                 <i class="fas fa-download me-2"></i>Download
                             </a>
                         </div>
@@ -346,7 +432,8 @@ $student = $result->fetch_assoc();
                                     <label class="file-upload-label w-100 text-center mb-0">
                                         <i class="fas fa-upload me-2"></i><span id="fileText">Choose New File</span>
                                     </label>
-                                    <input type="file" name="new_resume" id="new_resume" class="file-upload-input" accept=".pdf,.doc,.docx">
+                                    <input type="file" name="new_resume" id="new_resume" class="file-upload-input"
+                                        accept=".pdf,.doc,.docx">
                                 </div>
                                 <button type="submit" class="btn btn-resume" id="uploadBtn" disabled>
                                     <i class="fas fa-check me-2"></i>Update
@@ -364,16 +451,16 @@ $student = $result->fetch_assoc();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('new_resume').addEventListener('change', function(e) {
+        document.getElementById('new_resume').addEventListener('change', function (e) {
             const file = e.target.files[0];
             const fileText = document.getElementById('fileText');
             const uploadBtn = document.getElementById('uploadBtn');
-            
+
             if (file) {
                 const fileName = file.name;
                 const fileSize = (file.size / 1024 / 1024).toFixed(2);
                 const fileExt = fileName.split('.').pop().toLowerCase();
-                
+
                 if (!['pdf', 'doc', 'docx'].includes(fileExt)) {
                     alert('Please upload only PDF, DOC, or DOCX files!');
                     e.target.value = '';
@@ -381,7 +468,7 @@ $student = $result->fetch_assoc();
                     fileText.textContent = 'Choose New File';
                     return;
                 }
-                
+
                 if (file.size > 5242880) {
                     alert('File size must be less than 5MB!');
                     e.target.value = '';
@@ -389,7 +476,7 @@ $student = $result->fetch_assoc();
                     fileText.textContent = 'Choose New File';
                     return;
                 }
-                
+
                 fileText.innerHTML = `${fileName} (${fileSize} MB)`;
                 uploadBtn.disabled = false;
             } else {
@@ -398,5 +485,18 @@ $student = $result->fetch_assoc();
             }
         });
     </script>
+    <!-- Edit Skills block -->
+    <script>
+        document.getElementById('editSkillsBtn').addEventListener('click', function () {
+            document.getElementById('skillsDisplay').style.display = 'none';
+            document.getElementById('editSkillsForm').style.display = 'block';
+        });
+
+        document.getElementById('cancelEditBtn').addEventListener('click', function () {
+            document.getElementById('skillsDisplay').style.display = 'block';
+            document.getElementById('editSkillsForm').style.display = 'none';
+        });
+    </script>
 </body>
+
 </html>
