@@ -8,6 +8,7 @@ if (isLoggedIn()) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +23,7 @@ if (isLoggedIn()) {
             align-items: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .hero-section {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -29,17 +31,20 @@ if (isLoggedIn()) {
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
         }
+
         .hero-title {
             font-size: 3rem;
             font-weight: 700;
             color: #667eea;
             margin-bottom: 20px;
         }
+
         .hero-subtitle {
             font-size: 1.3rem;
             color: #666;
             margin-bottom: 40px;
         }
+
         .btn-custom {
             padding: 15px 40px;
             font-size: 1.1rem;
@@ -48,44 +53,53 @@ if (isLoggedIn()) {
             transition: all 0.3s ease;
             font-weight: 600;
         }
+
         .btn-primary-custom {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             color: white;
         }
+
         .btn-primary-custom:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
+
         .btn-outline-custom {
             border: 2px solid #667eea;
             color: #667eea;
             background: transparent;
         }
+
         .btn-outline-custom:hover {
             background: #667eea;
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
+
         .feature-icon {
             font-size: 3rem;
             color: #667eea;
             margin-bottom: 15px;
         }
+
         .features {
             margin-top: 60px;
         }
+
         .feature-card {
             text-align: center;
             padding: 30px;
             transition: transform 0.3s ease;
         }
+
         .feature-card:hover {
             transform: translateY(-10px);
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
@@ -94,13 +108,24 @@ if (isLoggedIn()) {
                     <i class="fas fa-briefcase feature-icon"></i>
                     <h1 class="hero-title">Internship Management System</h1>
                     <p class="hero-subtitle">Connect students with amazing internship opportunities</p>
-                    
+
+                    <!-- <div class="d-flex justify-content-center flex-wrap">
+                        <a href="login.php" class="btn btn-primary-custom btn-custom">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                        <a href="register.php" class="btn btn-outline-custom btn-custom">
+                            <i class="fas fa-user-plus me-2"></i>Register as Student
+                        </a>
+                    </div> -->
                     <div class="d-flex justify-content-center flex-wrap">
                         <a href="login.php" class="btn btn-primary-custom btn-custom">
                             <i class="fas fa-sign-in-alt me-2"></i>Login
                         </a>
                         <a href="register.php" class="btn btn-outline-custom btn-custom">
                             <i class="fas fa-user-plus me-2"></i>Register as Student
+                        </a>
+                        <a href="admin_login.php" class="btn btn-primary-custom btn-custom">
+                            <i class="fas fa-user-shield me-2"></i>Admin Login
                         </a>
                     </div>
 
@@ -136,4 +161,5 @@ if (isLoggedIn()) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
