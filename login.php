@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .login-container {
             background: white;
             border-radius: 20px;
@@ -68,28 +70,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             max-width: 450px;
             width: 100%;
         }
+
         .login-title {
             color: #667eea;
             font-weight: 700;
             margin-bottom: 30px;
             text-align: center;
         }
+
         .login-icon {
             font-size: 4rem;
             color: #667eea;
             text-align: center;
             margin-bottom: 20px;
         }
+
         .form-control {
             padding: 12px;
             border-radius: 10px;
             border: 2px solid #e0e0e0;
             transition: all 0.3s ease;
         }
+
         .form-control:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
         }
+
         .btn-login {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -100,14 +107,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: 100%;
             transition: all 0.3s ease;
         }
+
         .btn-login:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
-        .alert { border-radius: 10px; }
-        .form-label { font-weight: 600; color: #333; }
+
+        .alert {
+            border-radius: 10px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
@@ -126,24 +142,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form method="POST" action="">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                            <input type="password" name="password" class="form-control"
+                                placeholder="Enter your password" required>
                         </div>
                         <button type="submit" class="btn btn-login">
                             <i class="fas fa-sign-in-alt me-2"></i>Login
                         </button>
                         <div class="text-center mt-3">
-                            <p>Don't have an account? <a href="register.php" style="color: #667eea; font-weight: 600;">Register here</a></p>
+                            <p>Don't have an account? <a href="register.php"
+                                    style="color: #667eea; font-weight: 600;">Register here</a></p>
                             <a href="index.php" style="color: #999;">← Back to Home</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <div>
+            <!-- Footer Div -->
+            <footer class="footer">
+    © <?php echo date('Y'); ?> Internship Management System. Designed & Developed by
+                <strong>Shrinivas Inamdar</strong>. All rights reserved.
+            </footer>
+        </div>
     </div>
+    <!-- Footer div css -->
+    <style>
+        .footer {
+
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+        font-weight: 500;
+        width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        margin-top: 50px;
+        }
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>

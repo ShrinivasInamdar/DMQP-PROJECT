@@ -399,5 +399,6 @@ function viewDetails(internship) {
   modal.show();
 }
 </script>
+<?php include '../footer.php'; ?>
 </body>
 </html>

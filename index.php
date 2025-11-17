@@ -23,6 +23,7 @@ if (isLoggedIn()) {
             align-items: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
 
         .hero-section {
             background: rgba(255, 255, 255, 0.95);
@@ -157,9 +158,31 @@ if (isLoggedIn()) {
                 </div>
             </div>
         </div>
+        <div>
+            <!-- Footer Div -->
+            <footer class="footer">
+    © <?php echo date('Y'); ?> Internship Management System. Designed & Developed by
+                <strong>Shrinivas Inamdar</strong>. All rights reserved.
+            </footer>
+        </div>
     </div>
+    <!-- Footer div css -->
+    <style>
+        .footer {
+
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+        font-weight: 500;
+        width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        margin-top: 20px;
+        }
+    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

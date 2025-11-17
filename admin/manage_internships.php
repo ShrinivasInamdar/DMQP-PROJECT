@@ -270,6 +270,7 @@ $internships = $conn->query("SELECT * FROM internship ORDER BY posted_on DESC");
             </div>
         </div>
     </div>
+    <?php include '../footer.php'; ?>
 
     <!-- Add/Edit Modal -->
     <div class="modal fade" id="addModal" tabindex="-1">
@@ -397,5 +398,6 @@ $internships = $conn->query("SELECT * FROM internship ORDER BY posted_on DESC");
             document.getElementById('internship_id').value = '';
         });
     </script>
+    
 </body>
 </html>

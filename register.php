@@ -292,7 +292,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
         </div>
+         <div>
+            <!-- Footer Div -->
+            <footer class="footer">
+    © <?php echo date('Y'); ?> Internship Management System. Designed & Developed by
+                <strong>Shrinivas Inamdar</strong>. All rights reserved.
+            </footer>
+            </div>
     </div>
+    <!-- Footer div css -->
+    <style>
+        .footer {
+
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+        font-weight: 500;
+        width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        margin-top: 40px; 
+        
+        }
+    </style>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -357,5 +380,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         });
     </script>
+    
 </body>
 </html>

@@ -295,7 +295,9 @@ $internships_result = $conn->query($internships_query);
                 </table>
             </div>
         </div>
+        
     </div>
+   <?php include '../footer.php'; ?>
 
     <!-- Student Info Modal -->
     <div class="modal fade" id="studentModal" tabindex="-1">

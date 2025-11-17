@@ -307,6 +307,7 @@ $student = $result->fetch_assoc();
             <i class="fas fa-edit me-1"></i>Edit
         </button>
     </h5>
+    
 
     <div id="personalDisplay">
         <div class="info-row">
@@ -473,7 +474,10 @@ $student = $result->fetch_assoc();
                     </div>
                 </div>
             </div>
+            
         </div>
+        </div>
+        
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -535,6 +539,23 @@ $student = $result->fetch_assoc();
                 document.getElementById('editPersonalForm').style.display = 'none';
             });
         </script>
+     <div>
+            <!-- Footer Div -->
+            <footer class="footer-custom text-center py-3 mt-5">
+                © 2025 Internship Management System. Designed & Developed by
+                <strong>Shrinivas Inamdar</strong>. All rights reserved.
+            </footer>
+        </div>   
+        <!-- Footer div css -->
+    <style>
+        .footer-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            width: 100%;
+        }
+    </style>
 </body>
 
 </html>
