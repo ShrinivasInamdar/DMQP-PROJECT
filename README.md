@@ -5,16 +5,16 @@ This project allows admins to post internships and students to browse and apply.
 
 ---
 
-## Screenshots
+## Landing Page Screenshot
+![Screenshot 3](images/login.png)
 
-(Add your images by replacing the placeholders)
+### Screenshots
 
 | Student Dashboard | Admin Dashboard |
 |------------------|-----------------|
 | ![Screenshot 1](images/student.png) | ![Screenshot 2](images/admin.png) |
 
-### Additional Screenshot
-![Screenshot 3](images/login.png)
+
 
 ---
 
