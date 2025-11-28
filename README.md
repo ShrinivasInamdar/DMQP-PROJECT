@@ -12,7 +12,7 @@ This project allows admins to post internships and students to browse and apply.
 
 | Student Dashboard | Admin Dashboard |
 |------------------|-----------------|
-| ![Screenshot 1](images/student.png) | ![Screenshot 2](images/admin.png) |
+| ![Screenshot 1](images/students.png) | ![Screenshot 2](images/admin.png) |
 
 
 
